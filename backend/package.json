@@ -1,0 +1,19 @@
+{
+  "name": "keeper-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SUBS2905/keeper-app.git"
+  },
+  "author": "SUBS2905",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SUBS2905/keeper-app/issues"
+  },
+  "homepage": "https://github.com/SUBS2905/keeper-app#readme"
+}
