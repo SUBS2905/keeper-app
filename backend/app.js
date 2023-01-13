@@ -14,6 +14,15 @@ app.get("/", middleware, (req, res) => {
   res.send("Home Route");
 });
 
+app.get("/notes", (req, res) => {
+  Note.find({}, (err, notes) => {
+    if (err) res.status(500);
+    else {
+      res.json(notes);
+    }
+  });
+});
+
 app.post("/", async (req, res) => {
   const { title, content } = req.body;
   if (!title) {
