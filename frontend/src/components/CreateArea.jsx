@@ -4,7 +4,6 @@ import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
 
 function CreateArea(props) {
-
   const [isExpanded, setExpanded] = useState(false);
   const [note, setNote] = useState({
     title: "",
@@ -22,30 +21,49 @@ function CreateArea(props) {
     });
   }
 
-  function handleExpansion(){
+  function handleExpansion() {
     setExpanded(true);
   }
 
-  function submitNote(event) {
+  async function submitNote(event) {
     props.onAdd(note);
+    event.preventDefault();
+
+    const { title, content } = note;
+
+    const res = await fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, content }),
+    });
+
+    const data = await res.json();
+
+    if (res.status === 400 || !data)
+      window.alert("Please enter the title field");
+    else
+      window.alert("Note saved successfully");
+
     setNote({
       title: "",
       content: "",
     });
-    event.preventDefault();
   }
 
   return (
     <div>
       <form className="create-note">
+        {isExpanded ? (
+          <input
+            name="title"
+            onChange={handleChange}
+            value={note.title}
+            placeholder="Title"
+          />
+        ) : null}
 
-        {isExpanded ? (<input
-          name="title"
-          onChange={handleChange}
-          value={note.title}
-          placeholder="Title"
-        />) : null}
-        
         <textarea
           name="content"
           onChange={handleChange}
