@@ -26,9 +26,6 @@ function CreateArea(props) {
   }
 
   async function submitNote(event) {
-    props.onAdd(note);
-    event.preventDefault();
-
     const { title, content } = note;
 
     const res = await fetch("/", {
@@ -43,8 +40,10 @@ function CreateArea(props) {
 
     if (res.status === 400 || !data)
       window.alert("Please enter the title field");
-    else
-      window.alert("Note saved successfully");
+    else {
+      props.onAdd(note);
+      event.preventDefault();
+    }
 
     setNote({
       title: "",
