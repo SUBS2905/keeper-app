@@ -23,6 +23,15 @@ app.get("/notes", (req, res) => {
   });
 });
 
+app.delete("/delete/:id", (req, res) => {
+  Note.findByIdAndDelete(req.params.id, (err, note) => {
+    if (err) res.status(500);
+    else {
+      res.json(note);
+    }
+  });
+});
+
 app.post("/", async (req, res) => {
   const { title, content } = req.body;
   if (!title) {
