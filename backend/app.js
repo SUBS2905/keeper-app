@@ -44,7 +44,6 @@ app.post("/", async (req, res) => {
     res.status(201).json("Note saved successfully");
   } catch (err) {
     res.status(500);
-    console.log("Something went wrong");
     console.log(err);
   }
 });
