@@ -48,6 +48,14 @@ app.post("/", async (req, res) => {
   }
 });
 
+if (process.env.NODE_ENV == "production") {
+  const path = require("path");
+  app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
+
 const port = process.env.PORT;
 app.listen(port, () => {
   console.log("Server running at port 5000");
